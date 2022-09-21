@@ -1,0 +1,70 @@
+<!-- 目的: 建構Multi-layer Perceptron，利用Back propagation演算法訓練參數並進行XOR的分類。<br>
+<br> -->
+
+<ol>
+<li>Load the facenet model, and create the mtcnn face dectector<br>
+Image:<span class="red_text">(Click can scale.)</span><br>
+<img src="img/portfolio1/code_001.png">
+
+<br>
+
+在本次專案中，需要運用到mtcnn與facenet模型架構，程式碼19~25行將facenet
+load進Colab，運用tf.keras.utils.get_file將facenet_keras.h5檔案下載到本地端，再用load_model function
+從剛剛載入的檔案把model引入，之後運用tf.keras.utils.plot_model與display function將模型架構圖輸出顯示，程式碼26~27行，建立mtcnn偵測臉的偵測器。
+</li>
+
+
+<li>Mtcnn的使用，Mtcnn可以用於找出人臉範圍、左右眼、左右嘴角、鼻子的座標
+<br>
+Image:<span class="red_text">(Click can scale.)</span><br>
+    <img src="img/portfolio1/code_007.png">
+    <img src="img/portfolio1/img_001.png">
+    <img src="img/portfolio1/code_003.png">
+    <img src="img/portfolio1/code_004.png">
+    <img src="img/portfolio1/img_002.png"><br>
+    (1) 載入圖檔:利用tf.keras.utils.get_file下載圖檔，
+    之後利用tf.keras.preprocessing.image.load_img匯入圖檔，
+    再利用tf.keras.preprocessing.image.img_to_array匯入的圖檔轉
+    換成二維陣列，最後利用plt顯示此圖片。<br>
+    (2) 運用mtcnn detector將人臉範圍、左右眼、左右嘴角、鼻子畫出:此處先使用mtcnn將人臉範圍、左右眼、左右嘴角、鼻子的點座標紀
+    錄在results內，第10行程式碼的for迴圈部分，將results紀錄的點座標迭代，利用matplotlib的add_patch將臉部範圍、左右眼、左右嘴角、鼻子的點描繪在圖上，結果如圖(五)。
+
+
+
+
+</li>
+<li>Facenet的使用<br></li>
+Facenet可以用於找出個人的臉部特徵。
+Image:<span class="red_text">(Click can scale.)</span><br>
+    <img src="img/portfolio1/code_005.png">
+    <img src="img/portfolio1/code_006.png"><br>
+<li>(1) 接續圖片範例，利用facenet收集共9人的臉部特徵，上述function，由facenet
+    predict出臉部特徵，並retrun。<br>用上述的mtcnn方法將臉部範圍框出，再投入先前寫好的get_face_embedding
+    function將臉部特徵存入embedding再append到face_embedding陣列紀錄。
+    在24行利用np.vstack將每個人臉部特徵堆疊起來，形狀似先前lab中的訓練資料的特徵(每一列為一個人，接續行代表該人的特徵)。<br>
+   
+    預測結果:<br>
+    <img src="img/portfolio1/img_003.png" class="no_scale_img">
+    (2) 人臉分群
+    
+</li>
+Image:<span class="red_text">(Click can scale.)</span><br>
+    <img src="img/portfolio0/XOR005.png"><br>
+    3.	Facenet的使用以先前建立好的Perceptron class，進行初始化與訓練，其中訓練以learning rate為0.5訓練，共迭代5000次，每一回合print出修改過後各個參數的值。
+<li>Testing(Accuracy)<br></li>
+Image:<span class="red_text">(Click can scale.)</span><br>
+    <img src="img/portfolio0/XOR006.png"><br>
+    將在2.時的訓練資料與測試資料投入，並計算training accuracy與test accuracy。其中計算出兩類別的機率後，經由for迴圈每筆answer取高的機率為該列別。
+<li>Visualize decision boundary<br></li>
+Image:<span class="red_text">(Click can scale.)</span><br>
+    <img src="img/portfolio0/XOR007.png"><img src="img/portfolio0/XOR008.png"><br>
+    (1)	 圖(一)定義自己的繪圖function，由此神經網路的四個Perceptron參數w與參數b，繪製出共四條線。<br>
+    (2)  繪圖<br>
+    此處將兩層的Perceptron共四條Boundary繪出，第一層的Perceptron代表的Boundary兩條以紅色繪製，第二層的Perceptron代表的Boundary兩條以藍色繪製，將訓練資料(四個點，黃色為同一類，紫色為同一類)分類。
+</ol>
+
+
+
+<script>
+    scale_img();
+</script> 

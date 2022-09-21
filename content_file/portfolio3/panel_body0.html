@@ -1,0 +1,7 @@
+<!-- 先使用Mtcnn得知人臉範圍，再將人臉範圍切割出，輸入進Facenet神經網路，取出人臉的特徵，最後輸入以下由Keras建構的神經網路架構，得出人臉的分類結果。<br>
+<br>
+架構如下：<br>
+Input layer -> Affine layer -> softmax -> Output layer -->
+利用dlib人臉辨識模組，將人臉範圍取出，切割成上下半臉，做顏色統計，由上下臉的顏色統計相似度判斷是否佩戴口罩。<br>
+其中，經實驗發現當人臉與背景顏色相近時結果容易判斷錯誤，因此將dlib取出的範圍往臉部中間縮小，使背景的因素較不影響結果的判斷。<br>
+<img src="img/portfolio3/001.png" class = "no_scale_img" style="width: 50%;">

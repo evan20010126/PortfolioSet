@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Even's portfolio</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">    
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src = "js_file/share_function.js"></script>
+    <link rel="stylesheet" href = "css_file/share_css.css">
+    <style>
+         .dropdown:hover .dropdown-menu {
+            display: block;
+            margin-top: 0;
+            /* margin-left: 10%; */
+            /* remove the gap so it doesn't close */
+        } 
+        .no_color{
+            color: rgba(0, 0, 0, 0.9);
+        }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-default">        
+      <div class="container-fluid">
+        <div class="navbar-header">
+		  <a class="navbar-brand" href="#">Portfolio</a>
+		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+              <span class="sr-only">導覽按鈕</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+			  <span class="icon-bar"></span>
+          </button>          
+        </div>
+		<div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav" id = "evanPortfolio">
+		    <li><a href="#">首頁</a></li>
+
+            <!--      -->
+            <!-- here -->
+            <!--      -->
+          </ul>
+		</div>
+	  </div>
+    </nav>
+    <h1 style="text-align:center">title</h1>
+    <div class="container">
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#tab1" data-toggle="tab">介紹</a></li>	
+				<li ><a href="#tab2" data-toggle="tab">Demo Video</a></li>
+			</ul>
+			
+			<div class="tab-content">
+				<div class="tab-pane fade in active" id="tab1">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h1>介紹</h1>
+							<br>
+						</div>
+						<div class="panel-body">
+							藍寶堅尼在1966年因Miura跑車而獲得了廣泛好評，該車配有中置引擎和後輪驅動，此後成為超級跑車的標準配置。1998年5月27日把公司轉手賣給福斯集團旗下的奧迪汽車。奧迪的接手對藍寶堅尼來說進入了一個擁有強大而穩定的生產力的時代。在21世紀初期，銷售額以接近10倍的速度增長。而藍寶堅尼車款也常出現在電影中，廣為人知的暗黑騎士蝙蝠車、變形金剛4內無黨無派的賞金獵人。
+						</div>
+						<div class="panel-footer">
+							<button class="btn btn-info"><a class="no_color" href="https://github.com/evan20010126/code/blob/main/Program_py/Machine_learning/MY_LAB/00957202_LAB4_Perceptron.ipynb">Github code</a></button>
+                            
+						</div>			
+					</div>
+				</div>
+				
+				<div class="tab-pane fade" id="tab2">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h1>Demo Video</h1>
+							<br>
+						</div>
+						<div class="panel-body">
+							Porsche雖然是以打造純種跑車而聞名於世，但無論是2002年推出品牌首款SUV：Cayenne，或是2009年發表4門跑房車：Panamera，Porsche都恪守「造型完美時，性能就會伴隨而至」的創辦理念，並以打造賽車的標準來開發、調校與製作每一款車型。
+						</div>
+						<div class="panel-footer">
+							商標小典：商標中間是一匹駿馬，表示斯圖加特這個地方盛產一種名貴種馬；商標的左上方和右下方是鹿角的圖案，表示斯圖加特曾是狩獵的好地方；商標右上方和左下方的黃色條紋代表成熟了的麥子顏色，喻指五穀豐登，商標中的黑色代表肥沃土地，商標中的紅色象徵人們的智慧和對大自然的鍾愛，由此組成一幅精湛意深、秀氣美麗的田園風景畫，展現了保時捷公司輝煌的過去，並預示了保= E伀隊膝q美好的未來，保時捷跑車的出類拔萃！ 
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </body>
+  <script>
+    function start(){
+        createBarContent();
+    }
+    
+
+    window.onload = start; 
+  </script>
+</html>

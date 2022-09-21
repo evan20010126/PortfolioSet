@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Even's portfolio</title>
+    <!-- <link rel="icon" type="image/x-icon" href="/images/favicon.ico"> -->
+
+    <!-- Input bootstrap3.3.7 & jquery3.2.1.min.js -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">    
+	  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- ----------------------------------------- -->
+
+    <!-- Import js_file & css_file -->
+    <script src = "js_file/share_function.js"></script>
+    <link rel="stylesheet" href = "css_file/share_css.css">
+    <!-- ------------------------- -->
+  </head>
+  <body>
+    <div id = "evan_portfolio">
+      <!-- here to import common html by jquery -->
+    </div> 
+    
+  </body>   
+  <script>
+    var file_num = 0;
+    function start(){
+        $.get("evan_portfolio_templete.html",function(data){
+          $("#evan_portfolio").html(data);
+
+          /*set */
+          $("#caption").text("XOR classifier");
+
+          /*set 概述body*/
+          $.get("content_file/portfolio"+ file_num.toString() +"/panel_body0.html", function(data){
+            $(".panel-body:nth(0)").html(data);
+          })
+          
+          /*set 概述footer*/
+          $.get("content_file/portfolio"+ file_num.toString() +"/panel_footer0.html", function(data){
+            $(".panel-footer:nth(0)").html(data);
+          })
+          
+          /*set 介紹body*/
+          $.get("content_file/portfolio"+ file_num.toString() +"/panel_body1.html", function(data){
+            $(".panel-body:nth(1)").html(data);
+          })
+          
+          /*set demobody*/
+          $.get("content_file/portfolio"+ file_num.toString() +"/panel_body2.html", function(data){
+            $(".panel-body:nth(2)").html(data);
+          })
+          
+          /*set github href*/
+          $(".no_color").attr("href", "https://github.com/evan20010126/graduate_school/tree/main/XOR_neural")
+        });
+    }
+
+    window.onload = start; 
+  </script>
+</html>

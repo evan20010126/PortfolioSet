@@ -1,0 +1,124 @@
+目的: 利用人臉辨識模組完成口罩偵測系統。<br>
+
+<br>
+<img class="no_scale_img" src="img/portfolio3/002.png">
+<br>
+<br>
+相關技術介紹:
+<br>
+<img class="no_scale_img" src="img/portfolio3/003.png">
+<br>
+<br>
+<img class="no_scale_img" src="img/portfolio3/004.png">
+<br>
+<br>
+<img class="no_scale_img" src="img/portfolio3/000.png">
+
+
+<ol>
+<li>使用OpenCV提供的haarcascade_frontalface_default.xml進行臉部辨識<br>
+Image:<span class="red_text">(Click can scale.)</span><br>
+<img src="img/portfolio3/005.png">
+<img src="img/portfolio3/006.png"><br>
+(1) 如上圖(一)，載入haarcascade_frontalface_default.xml檔案，利用opencv的function新增CascadeClassifier物件，此物件可辨識圖片中人臉區塊。<br><br>
+(2)	上圖(二)為輸出結果，會發現此作法並不精準、精確，且對於圖片沒有人臉的部分出現許多誤判。
+
+</li>
+
+
+<li>評估方法可行性，計算accuracy，視覺化呈現結果。<br>
+Image:<span class="red_text">(Click can scale.)</span><br>
+    <img src="img/portfolio3/007.png"><br>
+    輸入多張圖片後，經過組員計數，得知有26個是判斷錯誤，僅有25個是判斷正確，並用plt模組繪出圓餅圖做可視化的呈現。<br>
+</li>
+
+<li>使用dlib進行人臉辨識<br></li>
+Image:<span class="red_text">(Click can scale.)</span><br>
+    <img src="img/portfolio3/008.png">
+    <img src="img/portfolio3/001.png">
+    <img src="img/portfolio3/001_2.png"><br>
+    dlib是一套簡便的人臉辨識模組，比上者能更佳精準。<br>
+    圖(一)，透過dlib.get_frontal_face_detector()取得偵測人臉之物件後，經由run得出臉部座標，進行繪圖。<br>
+    <br>
+    如圖(二)(三)，為Output，與前次測試的模組的結果相比，效果顯著。
+
+
+
+
+
+<li>評估方法可行性，計算accuracy，將兩次結果做視覺化呈現、比較<br></li>
+Image:<span class="red_text">(Click can scale.)</span><br>
+    <img src="img/portfolio3/009.png">
+    <img src="img/portfolio3/010.png"><br>
+    輸入多張圖片後，經過組員計數，得知由opencv CascadeClassifier判斷，有26個是判斷錯誤，僅有25個是判斷正確；而dlib判斷，有6個為判斷錯誤，45個為判斷正確，並利用plt做圓餅圖做視覺化呈現。<br>
+    <br>
+    經由以上兩種方式可得知，dlib較適合本系統。
+
+
+<li>範圍修正<br></li>
+Image:<span class="red_text">(Click can scale.)</span><br>
+    <img src="img/portfolio3/011.png"><br>
+    經由實驗過程中發現有時dlib求得的人臉範圍，有時會超出圖片大小，程式會crash，在此進行修正。
+
+<li>分為上下臉，來做顏色統計圖<br></li>
+Image:<span class="red_text">(Click can scale.)</span><br>
+    <img src="img/portfolio3/012.png"><img src="img/portfolio3/013.png">
+    <img src="img/portfolio3/014.png"><br>
+    利用得知的人臉範圍，分成上下臉，做出上下臉的顏色統計圖。
+
+<li>判斷上下臉直方圖的相似度</li>
+Image:<span class="red_text">(Click can scale.)</span><br>
+    <img src="img/portfolio3/015.png">
+    <img src="img/portfolio3/016.png"><br>
+    對取得的兩張直方圖數值做正規化，並使用opencv的compareHist算出相似度。<br>
+    最後利用model3內的detect function依據相似度值判斷是否有配戴口罩。<br>
+    <br>
+    其中，我們設定有戴口罩的門檻值為0.5以下，沒戴口罩的門檻值在0.65以上，0.5~0.65之間則是無法判斷，此門檻值是由11.的方法來設定的。<br>
+    <br>
+    圖(二)中，output值在0.5~0.65之間，判定此張圖無法判斷。
+
+<li>縮小照片擷取範圍，以減少背景帶來的誤差值</li>
+    Image:<span class="red_text">(Click can scale.)</span><br>
+    <img src="img/portfolio3/017.png">
+    <img src="img/portfolio3/018.png">
+    <img src="img/portfolio3/019.png"><br>
+    由圖(一)，程式碼第二三行縮小範圍，最後再繪製一次上下臉的直方圖。
+
+<li>重新判斷相似度</li>
+    Image:<span class="red_text">(Click can scale.)</span><br>
+    <img src="img/portfolio3/020.png">
+    <img src="img/portfolio3/021.png"><br>
+    重新判斷相似度，會發現背景與人物或口罩顏色相近的情況，可以減少錯誤的機率。
+
+<li>將結果存入SQLite</li>
+    Image:<span class="red_text">(Click can scale.)</span><br>
+    <img src="img/portfolio3/022.png">
+    <img src="img/portfolio3/022_2.png"><br>
+    將結果存入SQLite。<br>
+    圖(一)，將修正前的結果存入data.db。<br>
+    圖(二)，將修正後的結果存入data2.db。
+
+<li>驗證此方法可減少判斷為模糊不清的情況</li>
+    Image:<span class="red_text">(Click can scale.)</span><br>
+    <img src="img/portfolio3/023.png">
+    <img src="img/portfolio3/024.png">
+    <img src="img/portfolio3/025.png">
+    <img src="img/portfolio3/026.png">
+    <img src="img/portfolio3/027.png">
+    <img src="img/portfolio3/028.png"><br>
+    圖(一)、圖(二)、圖(三)為模糊前的結果。
+    其中，圖(二)、圖(五)以0.05為間隔統計相似度為x的數量<br>
+    綠色點為有戴口罩的資料，且當數量太少時不計，記做G，
+    <br>
+    紅色點沒有戴口罩的資料，且當數量太少時不計，記做R，
+    <br>
+    且定義模糊區間為：當相似度 = x時，有的Image label為G，有的為R，劃出臨界值藍線與紫線。
+    <br>
+    <br>
+    由圖(二)、圖(五)可以發現模糊區間經過縮小範圍後，可減少模糊區間的範圍，減少判斷為模糊不清的情況。
+</ol>
+
+<script>
+    scale_img();
+</script>
+
