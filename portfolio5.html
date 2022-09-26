@@ -53,6 +53,9 @@
           $.get("content_file/portfolio"+ file_num.toString() +"/panel_body2.html", function(data){
             $(".panel-body:nth(2)").html(data);
           })
+
+          /*append button*/
+          $(".panel-footer:nth(2)").append('<button class="btn btn-success"><a class="no_color" href="20.237.137.127:8888/pianoTutorial/index.html">Website</a></button>')
           
           /*set github href*/
           $(".no_color").attr("href", "https://github.com/evan20010126/graduate_school/tree/main/pianoTutorial")
