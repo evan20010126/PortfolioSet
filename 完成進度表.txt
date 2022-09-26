@@ -1,11 +1,11 @@
 作品    panel1  panel2 panel3
 0       v       v       
-1       v       
-2       
+1       v       <人臉辨識>
+2       <序列資料>
 3       v       v
 4       v       v
 5       v       v
-6       
+6       軟體工程
 7       
 8       
 9       
