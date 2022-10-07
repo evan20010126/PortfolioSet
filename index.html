@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Even's portfolio</title>
+    <title>Evan's portfolio</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">    
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -39,8 +39,8 @@
     </nav>
     <div class="container">   
       <div class="jumbotron">  
-  		  <h2>Even's portfolio</h2>
-        個人作品集網站
+  		  <h2>Evan's portfolio</h2>
+        介紹曾做過作品之網站。
       </div>
       <section>
         <div class="container">
@@ -135,7 +135,15 @@
     function start(){
         createBarContent();
     }
-    
+    let url = 'ws://20.237.137.127:80'
+    var ws = new WebSocket(url)
+    // 監聽連線狀態
+    ws.onopen = () => {
+      console.log('open connection')
+    }
+    ws.onclose = () => {
+      console.log('close connection');
+    }
 
     window.onload = start; 
   </script>
