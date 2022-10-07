@@ -41,7 +41,7 @@
           
           /*set 概述footer*/
           $.get("content_file/portfolio"+ file_num.toString() +"/panel_footer0.html", function(data){
-            $(".panel-footer:nth(0)").html(data);
+            $(".panel-heading:nth(0)").append(data);
           })
           
           /*set 介紹body*/
