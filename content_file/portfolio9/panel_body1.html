@@ -1,18 +1,14 @@
-目的: 建構完整且功能齊全的資料庫系統，並利用網頁做呈現<br>
+目的: 運用課堂中所學，SIC/XE簡易機器的硬體知識與assembly language對應的machine code格式，將assembly language組譯成SIC/XE可讀取的machine code。<br>
 <br>
-功能簡介：<br>此網站是專門給海大書局店家查詢資訊全部書籍資訊，可以提供海大書局店員即時修改書籍資訊、買家資訊、訂單資訊，並且可顯示全部書籍資訊、全部買家資訊、全部訂單資訊、依書籍種類查詢部分書籍、依訂單編號查詢該訂單的買家的連絡電話等。系統使用者為海大書局店員。
+簡介：專案採用two pass的寫法來撰寫assembler，First pass建立Symbol table，計算所有label的位置、開始的記憶體位置、結束的記憶體位置與整個程式的長度；Second pass針對每一行不同format的組合語言計算對應的memory address。
+
 <ol>
-<li>網站架構<br>
+<li>First pass<br>
 Image:<span class="red_text">(click to zoom)</span><br>
-<img src="img/portfolio7/1.png">
-<img src="img/portfolio7/2.png">
-<img src="img/portfolio7/3.png">
-<img src="img/portfolio7/4.png"><br>
-(1) 入口頁面，支援RWD，較為簡潔，上方使用Bootstrap的navbar來做導覽列，下方利用Bootstrap做的carousel來做輪播的效果，下方建置兩個panel，內容由php從後台經過資料庫語法引入前台javascript且利用ajax技術動態呈現內容。<br>
-<br>
-(2) 查詢頁面，最上方User_view按鈕可從資料庫建構的view看到user權限可看到的內容，並以Bootstrap的model呈現。網頁上方由Bootstrap table建構，以ajax技術動態呈現書籍總攬與訂單總攬，下方經由表單可查詢書籍、訂單連絡電話。<br>
-<br>
-(3) 修改頁面，上方可挑選要修改的是書籍、買家還是訂單，panel-tab會呈現對應的資訊，與下方新增、刪除、修改對應的填寫內容。
+<img src="img/portfolio9/decompositline.png">
+<img src="img/portfolio9/pass1.png"><br>
+圖（一）decompositline function主要可以將讀取到有不同長短的assembly language分割成不同的三部分：Label Opcode Operand，其中會移除註解行與空白行。
+圖（二）為主要first pass的程式碼，將opcode輔助assembler的假指令，
 
 </li>
 

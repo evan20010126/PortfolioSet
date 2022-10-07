@@ -17,7 +17,7 @@
 
 <ol>
 <li>使用OpenCV提供的haarcascade_frontalface_default.xml進行臉部辨識<br>
-Image:<span class="red_text">(Click can scale.)</span><br>
+Image:<span class="red_text">(click to zoom.)</span><br>
 <img src="img/portfolio3/005.png">
 <img src="img/portfolio3/006.png"><br>
 (1) 如上圖(一)，載入haarcascade_frontalface_default.xml檔案，利用opencv的function新增CascadeClassifier物件，此物件可辨識圖片中人臉區塊。<br><br>
@@ -27,13 +27,13 @@ Image:<span class="red_text">(Click can scale.)</span><br>
 
 
 <li>評估方法可行性，計算accuracy，視覺化呈現結果。<br>
-Image:<span class="red_text">(Click can scale.)</span><br>
+Image:<span class="red_text">(click to zoom.)</span><br>
     <img src="img/portfolio3/007.png"><br>
     輸入多張圖片後，經過組員計數，得知有26個是判斷錯誤，僅有25個是判斷正確，並用plt模組繪出圓餅圖做可視化的呈現。<br>
 </li>
 
 <li>使用dlib進行人臉辨識<br></li>
-Image:<span class="red_text">(Click can scale.)</span><br>
+Image:<span class="red_text">(click to zoom.)</span><br>
     <img src="img/portfolio3/008.png">
     <img src="img/portfolio3/001.png">
     <img src="img/portfolio3/001_2.png"><br>
@@ -47,7 +47,7 @@ Image:<span class="red_text">(Click can scale.)</span><br>
 
 
 <li>評估方法可行性，計算accuracy，將兩次結果做視覺化呈現、比較<br></li>
-Image:<span class="red_text">(Click can scale.)</span><br>
+Image:<span class="red_text">(click to zoom.)</span><br>
     <img src="img/portfolio3/009.png">
     <img src="img/portfolio3/010.png"><br>
     輸入多張圖片後，經過組員計數，得知由opencv CascadeClassifier判斷，有26個是判斷錯誤，僅有25個是判斷正確；而dlib判斷，有6個為判斷錯誤，45個為判斷正確，並利用plt做圓餅圖做視覺化呈現。<br>
@@ -56,18 +56,18 @@ Image:<span class="red_text">(Click can scale.)</span><br>
 
 
 <li>範圍修正<br></li>
-Image:<span class="red_text">(Click can scale.)</span><br>
+Image:<span class="red_text">(click to zoom.)</span><br>
     <img src="img/portfolio3/011.png"><br>
     經由實驗過程中發現有時dlib求得的人臉範圍，有時會超出圖片大小，程式會crash，在此進行修正。
 
 <li>分為上下臉，來做顏色統計圖<br></li>
-Image:<span class="red_text">(Click can scale.)</span><br>
+Image:<span class="red_text">(click to zoom.)</span><br>
     <img src="img/portfolio3/012.png"><img src="img/portfolio3/013.png">
     <img src="img/portfolio3/014.png"><br>
     利用得知的人臉範圍，分成上下臉，做出上下臉的顏色統計圖。
 
 <li>判斷上下臉直方圖的相似度</li>
-Image:<span class="red_text">(Click can scale.)</span><br>
+Image:<span class="red_text">(click to zoom.)</span><br>
     <img src="img/portfolio3/015.png">
     <img src="img/portfolio3/016.png"><br>
     對取得的兩張直方圖數值做正規化，並使用opencv的compareHist算出相似度。<br>
@@ -78,20 +78,20 @@ Image:<span class="red_text">(Click can scale.)</span><br>
     圖(二)中，output值在0.5~0.65之間，判定此張圖無法判斷。
 
 <li>縮小照片擷取範圍，以減少背景帶來的誤差值</li>
-    Image:<span class="red_text">(Click can scale.)</span><br>
+    Image:<span class="red_text">(click to zoom.)</span><br>
     <img src="img/portfolio3/017.png">
     <img src="img/portfolio3/018.png">
     <img src="img/portfolio3/019.png"><br>
     由圖(一)，程式碼第二三行縮小範圍，最後再繪製一次上下臉的直方圖。
 
 <li>重新判斷相似度</li>
-    Image:<span class="red_text">(Click can scale.)</span><br>
+    Image:<span class="red_text">(click to zoom.)</span><br>
     <img src="img/portfolio3/020.png">
     <img src="img/portfolio3/021.png"><br>
     重新判斷相似度，會發現背景與人物或口罩顏色相近的情況，可以減少錯誤的機率。
 
 <li>將結果存入SQLite</li>
-    Image:<span class="red_text">(Click can scale.)</span><br>
+    Image:<span class="red_text">(click to zoom.)</span><br>
     <img src="img/portfolio3/022.png">
     <img src="img/portfolio3/022_2.png"><br>
     將結果存入SQLite。<br>
@@ -99,7 +99,7 @@ Image:<span class="red_text">(Click can scale.)</span><br>
     圖(二)，將修正後的結果存入data2.db。
 
 <li>驗證此方法可減少判斷為模糊不清的情況</li>
-    Image:<span class="red_text">(Click can scale.)</span><br>
+    Image:<span class="red_text">(click to zoom.)</span><br>
     <img src="img/portfolio3/023.png">
     <img src="img/portfolio3/024.png">
     <img src="img/portfolio3/025.png">
