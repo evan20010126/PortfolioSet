@@ -5,11 +5,11 @@ var port = 80;
 
 app.use(express.static(__dirname));
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log('Express is running on http://localhost:' + port.toString());
 });
 
-const wss = new SocketServer({ app });
+const wss = new SocketServer({ server });
 
 wss.on('connection', ws => {
     console.log('Client connected');
