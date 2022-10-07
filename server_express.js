@@ -9,7 +9,7 @@ app.listen(port, () => {
     console.log('Express is running on http://localhost:' + port.toString());
 });
 
-const wss = new SocketServer({ server });
+const wss = new SocketServer({ app });
 
 wss.on('connection', ws => {
     console.log('Client connected');
