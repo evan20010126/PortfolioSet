@@ -10,7 +10,9 @@ function createBarContent(){
         //     </ul>
         // </li>
 
-        var portfolio = [["機器學習","XOR分類器", "人臉辨識","時間序列資料預測","人臉辨識&口罩偵測演算法"], ["網站開發", "興趣介紹網站", "鋼琴教學網站", "早餐店訂餐系統", "書目管理系統"], ["爬蟲", "網頁爬蟲"], ["系統程式", "SIC/XE Assembler","SIC/XE Linking Loader", "數學函式運算編譯器"], ["安卓", "試衣間", "Android 虛實整合遊戲"], ["電腦圖學", "Lighting helicopter"], ["網路傳輸", "TCP多人聊天室"], ["C++工具", "Garbage Collection For C++"], ["C#","今晚吃甚麼"]];
+    // var portfolio = [["機器學習", "XOR分類器", "人臉辨識", "時間序列資料預測", "人臉辨識&口罩偵測演算法"], ["網站開發", "興趣介紹網站", "鋼琴教學網站", "早餐店訂餐系統", "書目管理系統"], ["爬蟲", "網頁爬蟲"], ["系統程式", "SIC/XE Assembler", "SIC/XE Linking Loader", "數學函式運算編譯器"], ["安卓", "試衣間", "Android 虛實整合遊戲"], ["電腦圖學", "Lighting helicopter"], ["網路傳輸", "TCP多人聊天室"], ["C#", "今晚吃甚麼"]];
+    
+    var portfolio = [["機器學習","XOR分類器", "人臉辨識","時間序列資料預測","人臉辨識&口罩偵測演算法"], ["網站開發", "興趣介紹網站", "鋼琴教學網站", "早餐店訂餐系統", "書目管理系統"], ["爬蟲", "網頁爬蟲"], ["系統程式", "SIC/XE Assembler"]];
         var website_counter = 0;
         for(var i = 0; i < portfolio.length; ++i){  
             var tag_li = document.createElement("li");
