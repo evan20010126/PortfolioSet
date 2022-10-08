@@ -1,0 +1,55 @@
+<h2>一、系統概述(System Description)</h2><br>
+早餐是日常生活中不可或缺的一部分，不過有些人卻經常因此事苦惱。<br>
+一般早餐店的規模偏小，大部分的人都會選擇外帶。所以我們設計一套系統主要提供給海大的學生、教授及時訂餐與預約取餐的功能。<br>
+<br>
+因為我們的系統主要設計給海大的學生與教授，大家的生活較規律，因此我們設計了一個特別的「週預定」功能，且提供會員功能。此會員功能與市面上的軟體採用更有人性化的設計，以下會再將以上幾點詳述。<br>
+<br>
+⚘ 我們將早餐的訂餐流程分為以下三階段：
+點餐、等候取餐、取餐與付款。<br>
+    1. 點餐：顧客可以即時點餐，即時點餐的時間為每日早上5:00至10:30，也可以在前三天使用「自動取eat排程表」預約下個禮拜的餐點。<br>
+    2. 等候取餐：當使用即時訂餐功能時，最快取餐時間為下訂單後15分鐘，也有防棄單機制與商家取消訂單機制。
+    3. 取餐與付款：當店家餐點準備完成，系統會發送通知給顧客；付款方式則依店家可接受付款方式付款。<br>
+    <br>
+⚘ 更有人性化的會員功能：<br>
+1. 顧客可在會員設定中儲存自己的喜好，例如：蛋餅不加醬油、吐司切邊不要烤、不要加生菜等個人化設置。<br>
+2. 可直接串聯Google登入系統(Google OAuth 2.0)，以便使用者建立個人資料。<br>
+3. 系統自動記錄歷史點餐，累積訂單金額可享優惠。<br>
+4. 提供優惠活動，不定時給予優惠。
+<hr>
+<h2>二、系統設計</h2><br>
+<h3>1. 系統模型與架構(System Model/System Architecture)</h3>
+Image:<span class="red_text">(click to zoom.)</span><br>
+<img src="/img/portfolio6/1.png">
+<img src="/img/portfolio6/2.png"><br>
+系統模型如圖（一），基本流程：<br>			
+（1） 訪客透過手機或電腦使用本系統。<br>
+（2） 手機App與電腦網頁 Client 端透過HTML+CSS+Javascript+Boostrap實作。<br>
+（3） Server端使用PHP實作。<br>
+（4） 後台資料庫採用MariaDB。<br>
+（5） 後台將會串接 Googl OAuth 2.0 API，將使用者的 Google 權限接至本系統；也可採用一般登入系統<br>
+（6） 訪客進行註冊或登入成為顧客或老闆，顧客可送出訂單給老闆。<br>
+（7） 老闆收到訂單，決定訂單完成或拒絕，系統使用Javascript通知顧客。<br>
+（8）流程結束<br>
+<br>
+一般功能子系統如圖（二），<br>
+在此子系統下，顧客可以在前台進行註冊、登入、瀏覽菜單、課表、設定個人檔案、我的最愛，顧客和使用者(前台)運用Account與(後台)進行交流存取資料。
+
+<h3>2. 類別圖設計(Class Diagram)</h3><br>
+Image:<span class="red_text">(click to zoom.)</span><br>
+<img src="/img/portfolio6/3.png"><br>
+系統模型如圖。須對照上方「一般子系統」圖中的各個module。
+
+<h3>3. 資料庫設計(Database Deign)</h3><br>
+Image:<span class="red_text">(click to zoom.)</span><br>
+<img src="/img/portfolio6/4.jpg">
+<img src="/img/portfolio6/5.jpg">
+<img src="/img/portfolio6/6.jpg">
+<img src="/img/portfolio6/7.jpg">
+<img src="/img/portfolio6/8.jpg"><br>
+資料庫Table設計如上圖，且利用Mariadb建構。
+
+
+<script>
+    scale_img();
+</script>
+
