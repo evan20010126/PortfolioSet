@@ -1,4 +1,7 @@
-<!-- 先使用Mtcnn得知人臉範圍，再將人臉範圍切割出，輸入進Facenet神經網路，取出人臉的特徵，最後輸入以下由Keras建構的神經網路架構，得出人臉的分類結果。<br>
-<br>
-架構如下：<br>
-Input layer -> Affine layer -> softmax -> Output layer -->
+利用numpy建構序列資料，形狀為高斯函數加上雜訊，並利用Keras搭建以下六種架構進行預測。<br>
+1.	單層SimpleRNN<br>
+2.	多堆疊幾層的SimpleRNN<br>
+3.	多堆疊幾層且輸出層改為Affine layer的RNN<br>
+4.	單層LSTM<br>
+5.	多堆疊幾層的LSTM<br>
+6.	多堆疊幾層且輸出層改為Affine layer的LSTM
