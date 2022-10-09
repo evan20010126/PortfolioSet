@@ -10,18 +10,12 @@ const server = app.listen(port, () =>
 
 const wss = new SocketServer({ server })
 
-wss.on('connection', ws => {
+wss.on('connection', (ws, req) => {
+
     console.log('Client connected')
 
-    ws.on('message', data => {
-        //取得所有連接中的 client
-        console.log(data.toString())
-        let clients = wss.clients
-        //做迴圈，發送訊息至每個 client
-        clients.forEach(client => {
-            client.send(data.toString())
-        })
-    })
+    console.log(req.socket.remoteAddress)
+
 
     ws.on('close', () => {
         console.log('Close connected')
