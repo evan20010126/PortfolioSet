@@ -1,45 +1,112 @@
 <!-- 目的: 建構Multi-layer Perceptron，利用Back propagation演算法訓練參數並進行XOR的分類。<br>
+    -->
 <br>
 <ol>
-<li>建構Perceptron model class<br>
+<li>建構繪圖函式以利呈現時間序列資料<br>
 Image:<span class="red_text">(click to zoom.)</span><br>
-<img src="img/portfolio0/XOR001.png">
-<img src="img/portfolio0/XOR002.jpg"><br>
-(1) 如上圖(一)建立分類XOR的神經網路架構，其中Perceptron的安排如圖(二)，最後再比較輸出為0的機率與為1的機率判斷答案為0或為1。<br><br>
-(2)	在function: train的部分，先初始化每一個參數(w與b)，以np.random.rand隨機賦值，透過for迴圈重複訓練，先經過預測的神經網路架構後，運用loss function(Mean Squared Error)進行倒傳遞演算法，算出各層的gradient值，最後再透過負gradient方向修改各個參數，訓練完畢後return 訓練好的參數值。<br><br>
-(3)	在function: predict的部分，以上圖二(手繪)的神經架構建構模型，第一層有兩個Perceptron透過全連接方式連接，第二層同上，最後丟入softmax function轉換為類別的機率值。
-
-</li>
+<img src="img/portfolio2/img_001.png"><br>
+</li> 
 
 
-<li>生成訓練資料集與測試資料集<br>
+<li>使用模擬的時間序列資料(分別透過RNN&LSTM)<br>
 Image:<span class="red_text">(click to zoom.)</span><br>
-    <img src="img/portfolio0/XOR003.png"><br>
-    因為為XOR，input僅有[0,0], [0,1], [1,0], [1,1]四種所以訓練資料僅用此四樣。訓練資料集由np.random.randint函式生成，並由for迴圈比較input data1與input data2，若兩者一樣為0號類別，不同則為1號類別。<br>
+    <img src="img/portfolio2/img_002.png"><img src="img/portfolio2/img_003.png"><img src="img/portfolio2/img_004.png"> <br>
     <br>
-    註解: 我的答案有分「各個類別機率的答案」與「類別是哪一個的答案」，後者答案由「各個類別機率的答案」取大的機率的類別為得之。
+(1)先建構序列資料<br>
+圖(一)由generate_sample function來建構不同的時間序列資料。
+隨機改變0.5sin(10(t+10)) 與 0.25sin(20(t+20))的週期與在時間軸位移、疊加、加上高斯雜訊。其中np.random.rand乘以某個標準差可以建構某個形狀高斯函數。<br>
+<br>
+圖(二)利用剛剛定義的function，產生含100個時間點的四個樣本，並繪圖出來。<br>
+<br>
+圖(三)利用剛剛的function產生含有51個時間點的10000筆資料，並切割成train data, valid data, test data，其中前50個時間點為特徵，來預測第51個時間點的值。<br>
+<br>
+</li>
+
+<li>RNN<br>
+Image:<span class="red_text">(click to zoom.)</span><br>
+<img src="img/portfolio2/img_004.png"><img src="img/portfolio2/img_005.png"><img src="img/portfolio2/img_007.png"> <br>
+<br>
+<br>
+(1)	Simple RNN<br>
+圖(一)利用keras提供的Sequential()建構model<br>
+Input的shape設定為[None, 1]，None指的是資料個數會依據input資料個數調整，1指的是每筆資料各有1個值。<br>
+添加一層SimpleRNN且其output設定只有1個值。<br>
+Loss function使用keras提供的mse，optimizer使用keras提供的adam來最佳化參數。<br>
+<br>
+圖(二)利用fit來進行訓練，並繪出loss function與valid loss的曲線。<br>
+<br>
+圖(三)利用建立的單層SimpleRNN對測試資料進行預測，再用預測的答案與正確答案做用loss function (MSE)來評估，並取平均值輸出。<br>
+除了輸出loss值，還取其中一筆資料來查看預測的點與實際正確的點，並繪圖出來。<br>
+<br>
+Image:<span class="red_text">(click to zoom.)</span><br>
+<img src="img/portfolio2/img_008.png"><img src="img/portfolio2/img_009.png"><img src="img/portfolio2/img_010.png"><img src="img/portfolio2/img_011.png"> <br>
+<br>
+(2)	多堆疊幾層的SimpleRNN<br>
+圖(一)利用keras提供的Sequential()建構model<br>
+Input的設定與上個例子一樣，而在model的層數安排，使用三層SimpleRNN其中前面兩層的output值設定為15個，最後一層設定1個(因為預測的點只有一個)，且前面兩層的return_squences為True，所以前面兩層是回傳序列資料給下一層。<br>
+Loss function使用keras提供的mse，optimizer使用keras提供的adam來最佳化參數。<br>
+<br>
+圖(二)利用fit來進行訓練，並繪出loss function與valid loss的曲線。<br>
+<br>
+圖(三)利用建立的三層SimpleRNN對測試資料進行預測，再用預測的答案與正確答案做用loss function (MSE)來評估，並取平均值輸出。<br>
+除了輸出loss值，還取其中一筆資料來查看預測的點與實際正確的點，並繪圖出來。<br>
+<br>
+圖(四)因為model沒有限制每一段序列長度，比較50、40、30、20、10時間點的預測準確度。發現約最近的30時間點來預測就夠了。<br> 
+<br>
+Image:<span class="red_text">(click to zoom.)</span><br>
+<img src="img/portfolio2/img_012.png"><img src="img/portfolio2/img_013.png"><img src="img/portfolio2/img_014.png"> <br>
+(3)	改變一下輸出層為全連接層的RNN<br>
+圖(一)利用keras提供的Sequential()建構model<br>
+Input的設定與上個例子一樣，而在model的層數安排，使用三層SimpleRNN其中output值設定為15個且return_squences為True回傳序列資料給下一層，最後一層設定為全連接層，設定輸出一個output值。<br>
+Loss function使用keras提供的mse，optimizer使用keras提供的adam來最佳化參數。<br>
+<br>
+圖(二)利用fit來進行訓練，並繪出loss function與valid loss的曲線。<br>
+<br>
+圖(三)利用建立的三層SimpleRNN加一層全連接層對測試資料進行預測，再用預測的答案與正確答案做用loss function (MSE)來評估，並取平均值輸出。<br>
+除了輸出loss值，還取其中一筆資料來查看預測的點與實際正確的點，並繪圖出來。<br>
+<br>
+Image:<span class="red_text">(click to zoom.)</span><br>
+<img src="img/portfolio2/img_015.png"><img src="img/portfolio2/img_016.png"><br>
+<br>
+(4)	上圖比較以上不同架構安排的預測函數<br>
 
 </li>
-<li>Training data set作圖<br></li>
-Image:<span class="red_text">(click to zoom.)</span><br>
-    <img src="img/portfolio0/XOR004.png"><br>
-    以四筆training data利用plt作圖(共四個點，黃色為同一類，紫色為同一類)。
-<li>Initialization and training the mode<br></li>
-Image:<span class="red_text">(click to zoom.)</span><br>
-    <img src="img/portfolio0/XOR005.png"><br>
-    以先前建立好的Perceptron class，進行初始化與訓練，其中訓練以learning rate為0.5訓練，共迭代5000次，每一回合print出修改過後各個參數的值。
-<li>Testing(Accuracy)<br></li>
-Image:<span class="red_text">(click to zoom.)</span><br>
-    <img src="img/portfolio0/XOR006.png"><br>
-    將在2.時的訓練資料與測試資料投入，並計算training accuracy與test accuracy。其中計算出兩類別的機率後，經由for迴圈每筆answer取高的機率為該列別。
-<li>Visualize decision boundary<br></li>
-Image:<span class="red_text">(click to zoom.)</span><br>
-    <img src="img/portfolio0/XOR007.png"><img src="img/portfolio0/XOR008.png"><br>
-    (1)	 圖(一)定義自己的繪圖function，由此神經網路的四個Perceptron參數w與參數b，繪製出共四條線。<br>
-    (2)  繪圖<br>
-    此處將兩層的Perceptron共四條Boundary繪出，第一層的Perceptron代表的Boundary兩條以紅色繪製，第二層的Perceptron代表的Boundary兩條以藍色繪製，將訓練資料(四個點，黃色為同一類，紫色為同一類)分類。
+
+
+<li>LSTM<br>
+    Image:<span class="red_text">(click to zoom.)</span><br>
+<img src="img/portfolio2/img_017.png"><img src="img/portfolio2/img_018.png"><img src="img/portfolio2/img_019.png"><br>
+<br>
+(1)	LSTM<br>
+圖(一)利用keras提供的Sequential()建構model<br>
+Input的shape設定為[None, 1]，None指的是資料個數會依據input資料個數調整，1指的是每筆資料各有1個值。<br>
+添加一層LSTM且其output設定只有1個值。<br>
+Loss function使用keras提供的mse，optimizer使用keras提供的adam來最佳化參數。<br>
+圖(二)利用fit來進行訓練，並繪出loss function與valid loss的曲線。<br>
+<br>
+圖(三)利用建立的單層LSTM對測試資料進行預測，再用預測的答案與正確答案做用loss function (MSE)來評估，並取平均值輸出。<br>
+除了輸出loss值，還取其中一筆資料來查看預測的點與實際正確的點，並繪圖出來。<br>
+<br>
+ Image:<span class="red_text">(click to zoom.)</span><br>
+<img src="img/portfolio2/img_020.png"><img src="img/portfolio2/img_021.png"><img src="img/portfolio2/img_023.png"><img src="img/portfolio2/img_022.png"><br>
+<br>
+(2)	多堆疊幾層的LSTM<br>
+圖(一)利用keras提供的Sequential()建構model<br>
+Input的設定與上個例子一樣，而在model的層數安排，使用三層LSTM其中前面兩層的output值設定為15個，最後一層設定1個(因為預測的點只有一個)，且前面兩層的return_squences為True，所以前面兩層是回傳序列資料給下一層。<br>
+Loss function使用keras提供的mse，optimizer使用keras提供的adam來最佳化參數。<br>
+<br>
+圖(二)利用fit來進行訓練，並繪出loss function與valid loss的曲線。<br>
+<br>
+圖(三)利用建立的三層LSTM對測試資料進行預測，再用預測的答案與正確答案做用loss function (MSE)來評估，並取平均值輸出。<br>
+除了輸出loss值，還取其中一筆資料來查看預測的點與實際正確的點，並繪圖出來。<br>
+<br>
+圖(四)因為model沒有限制每一段序列長度，比較50、40、30、20、10時間點的預測準確度。發現約最近的30時間點來預測就夠了與RNN的情況一樣。<br>
+</li>
+
+
+<!-- 從((3)	改變一下輸出層為全連接層的LSTM)開始 -->
 </ol>
--->
+
 <script>
     scale_img();
 </script>

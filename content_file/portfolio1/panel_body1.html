@@ -34,37 +34,108 @@ Image:<span class="red_text">(click to zoom.)</span><br>
 
 
 </li>
-<li>Facenet的使用<br></li>
-Facenet可以用於找出個人的臉部特徵。
+<li>Facenet的使用<br>
+Facenet可以用於找出個人的臉部特徵。<br>
 Image:<span class="red_text">(click to zoom.)</span><br>
     <img src="img/portfolio1/code_005.png">
     <img src="img/portfolio1/code_006.png"><br>
-<li>(1) 接續圖片範例，利用facenet收集共9人的臉部特徵，上述function，由facenetpredict出臉部特徵，並retrun。<br>
+(1) 接續圖片範例，利用facenet收集共9人的臉部特徵，上述function，由facenetpredict出臉部特徵，並retrun。<br>
     用上述的mtcnn方法將臉部範圍框出，再投入先前寫好的get_face_embedding
     function將臉部特徵存入embedding再append到face_embedding陣列紀錄。
     先用上述2.的mtcnn方法將臉部範圍框出，再投入先前寫好的get_face_embedding function將臉部特徵存入embedding再append到face_embedding陣列紀錄。
-    在24行利用np.vstack將每個人臉部特徵堆疊起來，形狀似先前lab中的訓練資料的特徵(每一列為一個人，接續行代表該人的特徵)
     在24行利用np.vstack將每個人臉部特徵堆疊起來，形狀似先前lab中的訓練資料的特徵(每一列為一個人，接續行代表該人的特徵)。<br>
    
     預測結果:<br>
     <img src="img/portfolio1/img_003.png" class="no_scale_img">
-    (2) 人臉分群
+    <br>
+    <br>
+    (2) 人臉分群<br>
+    Image:<span class="red_text">(click to zoom.)</span><br>
+    <img src="img/portfolio1/img_005.png"><br>
+    使用Agglomerative Clustering搭配ward linkage，將人臉分三群(c:0,c:1,c:2三群)，利用sklearn的AgglomerativeClustering投入上述取出的臉部特徵，並設定分為三群。<br>最後由程式碼5~22行顯示分群結果，先逐個label迭代，將label被分為c的圖片index存起來，最後由14行後將各張圖片以及對應的label輸出。<br>
+    預測結果如上圖。<br>
     
-
 </li>
+
+<br>
+<li>利用mtcnn與facenet來實作臉部辨識<br></li>
 Image:<span class="red_text">(click to zoom.)</span><br>
-    <img src="img/portfolio0/XOR005.png"><br>
-    3.	Facenet的使用以先前建立好的Perceptron class，進行初始化與訓練，其中訓練以learning rate為0.5訓練，共迭代5000次，每一回合print出修改過後各個參數的值。
-<li>Testing(Accuracy)<br></li>
-Image:<span class="red_text">(click to zoom.)</span><br>
-    <img src="img/portfolio0/XOR006.png"><br>
-    將在2.時的訓練資料與測試資料投入，並計算training accuracy與test accuracy。其中計算出兩類別的機率後，經由for迴圈每筆answer取高的機率為該列別。
-<li>Visualize decision boundary<br></li>
-Image:<span class="red_text">(click to zoom.)</span><br>
-    <img src="img/portfolio0/XOR007.png"><img src="img/portfolio0/XOR008.png"><br>
-    (1)	 圖(一)定義自己的繪圖function，由此神經網路的四個Perceptron參數w與參數b，繪製出共四條線。<br>
-    (2)  繪圖<br>
-    此處將兩層的Perceptron共四條Boundary繪出，第一層的Perceptron代表的Boundary兩條以紅色繪製，第二層的Perceptron代表的Boundary兩條以藍色繪製，將訓練資料(四個點，黃色為同一類，紫色為同一類)分類。
+    <img src="img/portfolio1/img_006.png">
+    <img src="img/portfolio1/img_007.png">
+    <img src="img/portfolio1/img_009.png">
+    <img src="img/portfolio1/img_008.png">
+    <img src="img/portfolio1/img_010.png"><br>
+    (1)	準備dataset、training data、val data、test data<br>
+    圖（一）程式碼將kaggle.json匯入，以供後續下載kaggle資料集使用。<br>
+    <br>
+    圖（二）程式碼會先判斷資料夾內是否有5-celebrity-faces-dataset資料夾，若沒有會新增一個5-celebrity-faces-dataset資料夾，並將kaggle下載的資料集(.zip)放入此資料夾並解壓縮產生data資料夾、train資料夾、val資料夾。<br>
+    <br>
+    圖（三）為下載後的結果。<br>
+    <br>
+    圖（四），因為從kaggle下載的資料集並沒有test data僅有train data與 val data，所以此段程式碼我先建立test資料夾，並從train data與val data每個類別個切割1筆資料當作測試資料(test data各類別有兩筆資料)。<br>
+    <br>
+    圖（五），為最後的dataset。<br>
+
+    <br>
+    (2)	撰寫所需function<br>
+    Image:<span class="red_text">(click to zoom.)</span><br>
+    <img src="img/portfolio1/img_011.png"><br>
+    generate_example function:<br>
+    先使用mtcnn detector將人臉範圍框出，並對圖片進行切割，最後利用先前寫好的get_face_embedding丟入facenet得出此人臉的features(embedding)，最後產生兩個array分別為feature與對應的標籤並return。<br>
+
+    def_face_recognition_model function:<br>
+    建立人臉辨識的model，安排各層分別為input層、dense層，並使用adam最佳化演算法，loss function使用crossentropy。<br>
+
+    face_recognition function:<br>
+    投入image，先用facenet得出臉部特徵，再使用訓練好的分類器得出該人的名字(圖片的類別)。<br>
+    <br>
+    (3)	將train data、val data、test data切割成feature (x)與對應label (y)<br>
+    Image:<span class="red_text">(click to zoom.)</span><br>
+    <img src="img/portfolio1/img_011.png"><br>
+    此處有利用先前寫好的generate_examples function將data切割成feature陣列與對應標籤的陣列。<br>
+    <br>
+    (4)訓練el人臉辨識mod<br>
+    Image:<span class="red_text">(click to zoom.)</span><br>
+    <img src="img/portfolio1/img_012.png"><br>
+    使用先前建立好的def_face_recognition_model function將model建立。<br>
+    並使用先前準備好的train data、validation data進行訓練。<br>
+    <br>
+    (5)	輸出訓練的正確率曲線、loss曲線<br>
+    Image:<span class="red_text">(click to zoom.)</span><br>
+    <img src="img/portfolio1/img_013.png"><br>
+    <br>
+    (6)	儲存model與重新載入model<br>
+    Image:<span class="red_text">(click to zoom.)</span><br>
+    <img src="img/portfolio1/img_014.png"><br>
+    <br>
+    (7)	實際使用訓練好的人臉辨識model<br>
+    查看val data的結果並計算正確率。<br>
+    Image:<span class="red_text">(click to zoom.)</span><br>
+    <img src="img/portfolio1/img_015.png"><br>
+    使用for迴圈隨機迭代10張val data，先產生圖片並投入mtcnn detector得圖片中人臉範圍並對圖片進行切割，後續投入face_recogition function使用facenet將此人臉的特徵取出並使用訓練好的分類器進行分類得出此人的名字
+    (圖片的類別)。<br>
+    途中判斷預測的結果是否正確，並計算正確率。<br>
+    <br>
+    Output:<br>
+    Image:<span class="red_text">(click to zoom.)</span><br>
+    <img src="img/portfolio1/img_016.png"><br>
+    得知val data的正確率為100%<br>
+    <br>
+    查看test data的結果並計算正確率。<br>
+    Image:<span class="red_text">(click to zoom.)</span><br>
+    <img src="img/portfolio1/img_017.png"><br>
+    使用for迴圈依序迭代所有test data，
+    先產生圖片並投入mtcnn detector得圖片中人臉範圍並對圖片進
+    行切割，後續投入face_recogition function使用facenet將此
+    人臉的特徵取出並使用訓練好的分類器進行分類得出此人的名字
+    (圖片的類別)。<br>
+    途中判斷預測的結果是否正確，並計算正確率。<br>
+    <br>
+    Output:<br>
+    Image:<span class="red_text">(click to zoom.)</span><br>
+    <img src="img/portfolio1/img_018.png"><br>
+    得知test data的正確率為100%<br>
+
 </ol>
 
 
