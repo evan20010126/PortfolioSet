@@ -1,10 +1,22 @@
 {
   "dependencies": {
-    "express": "^4.18.1",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
     "fs": "^0.0.1-security",
     "http": "^0.0.1-security",
     "path": "^0.12.7",
     "url": "^0.11.0",
     "ws": "^8.9.0"
-  }
+  },
+  "name": "portfolioset",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
